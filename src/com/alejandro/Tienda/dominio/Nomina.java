@@ -39,5 +39,14 @@ public class Nomina {
         }
         return freelances;
     }
+    public List<Promotor> listarPromotores(){
+        List<Promotor> promotores = new ArrayList<>();
+        for (Empleado tipo: empleados) {
+            if(tipo instanceof Promotor){
+                promotores.add((Promotor) tipo);
+            }
+        }
+        return promotores;
+    }
 
 }

@@ -13,7 +13,7 @@ public class Main {
             switch (opcion){
                 case 0:{
                     String nombre = JOptionPane.showInputDialog(null,"Ingrese nombre");
-                    String tipoEmpleado = (String) JOptionPane.showInputDialog(null,"Que tipo de contrato tiene?","Tipo de Empleado",JOptionPane.INFORMATION_MESSAGE,null,new Object[]{"Directo","Vendedor","Freelancer"},null);
+                    String tipoEmpleado = (String) JOptionPane.showInputDialog(null,"Que tipo de contrato tiene?","Tipo de Empleado",JOptionPane.INFORMATION_MESSAGE,null,new Object[]{"Directo","Vendedor","Freelancer","Promotor"},null);
                     switch (tipoEmpleado){
                         case "Directo":{
                             long salarioBase = Long.parseLong(JOptionPane.showInputDialog("Ingrese salario base"));
@@ -35,6 +35,14 @@ public class Main {
                             sistemaNomina.añadirEmpleado(nuevoAgregar);
                             break;
                         }
+                        case "Promotor":{
+                            int cantidadVolantesRepartidos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cuantos volantes repartio"));
+                            long valorPorVolante = Long.parseLong(JOptionPane.showInputDialog("Ingrese valor por volante"));
+                            int comprarRealizadasPorVolante = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cuantas compras se efectuaron en la tienda"));
+                            Empleado nuevoAgregar = new Promotor(nombre,cantidadVolantesRepartidos,valorPorVolante,comprarRealizadasPorVolante);
+                            sistemaNomina.añadirEmpleado(nuevoAgregar);
+                            break;
+                        }
                     }
                     break;
                 }
@@ -47,7 +55,7 @@ public class Main {
                     break;
                 }
                 case 2:{
-                    int opcionTabla = JOptionPane.showOptionDialog(null,"Que tabla desea ver?","Tablas",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{"Tabla Directo","Tabla Freelance"},null);
+                    int opcionTabla = JOptionPane.showOptionDialog(null,"Que tabla desea ver?","Tablas",JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE,null,new Object[]{"Tabla Directo","Tabla Freelance","Tabla Promotor"},null);
                     switch (opcionTabla){
                         case 0: {
                             String tablaEnPantalla = "";
@@ -63,6 +71,14 @@ public class Main {
                                 tablaEnPantalla += tabla.toString()+"\n";
                             }
                             JOptionPane.showMessageDialog(null,tablaEnPantalla,"Tabla Freelancers",JOptionPane.INFORMATION_MESSAGE);
+                            break;
+                        }
+                        case 2:{
+                            String tablaEnPantalla = "";
+                            for (Empleado tabla: sistemaNomina.listarPromotores()) {
+                                tablaEnPantalla += tabla.toString()+"\n";
+                            }
+                            JOptionPane.showMessageDialog(null,tablaEnPantalla,"Tabla Promotores",JOptionPane.INFORMATION_MESSAGE);
                             break;
                         }
                     }
